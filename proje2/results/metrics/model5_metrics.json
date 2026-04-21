@@ -1,0 +1,12 @@
+{
+  "model_name": "Model 5 - End-to-End ResNet18 (CIFAR-10)",
+  "note": "Model 3 agirliklari kullanildi, odev izni uyarinca yeni egitim yapilmadi (PDF: 'ilk 3 modelden biri secilecekse ayni veri setleri kullanilacak olup 5. model kullanimina gerek yoktur').",
+  "weights_source": "model3_weights.pth",
+  "test_size": 10000,
+  "num_params": 11173962,
+  "batch_size": 256,
+  "seed": 42,
+  "accuracy": 0.9408,
+  "macro_f1": 0.9408325036562333,
+  "eval_time_seconds": 13.442223310470581
+}

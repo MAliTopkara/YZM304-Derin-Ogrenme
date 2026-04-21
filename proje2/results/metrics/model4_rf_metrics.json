@@ -1,0 +1,16 @@
+{
+  "model_name": "Model 4b - ResNet18 features + Random Forest",
+  "classifier": "sklearn.ensemble.RandomForestClassifier",
+  "n_estimators": 200,
+  "max_depth": null,
+  "n_jobs": -1,
+  "scaler": null,
+  "train_size": 50000,
+  "test_size": 10000,
+  "feature_dim": 512,
+  "seed": 42,
+  "accuracy": 0.9396,
+  "macro_f1": 0.9397086559389622,
+  "fit_time_seconds": 9.221842050552368,
+  "predict_time_seconds": 0.07670331001281738
+}

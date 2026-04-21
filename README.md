@@ -11,5 +11,6 @@ Ankara Universitesi · Yapay Zeka ve Veri Muhendisligi
 | # | Klasor | Konu | Durum |
 |---|--------|------|-------|
 | 1 | [proje-1/](proje-1/) | MLP ile Siniflandirma (BankNote + Wine Quality) | Tamamlandi |
+| 2 | [proje2/](proje2/) | CNN ile Ozellik Cikarma ve Siniflandirma (MNIST + CIFAR-10) | Tamamlandi |
 
 Her projenin kendi klasorunde ayri bir `README.md` dosyasi bulunmaktadir.

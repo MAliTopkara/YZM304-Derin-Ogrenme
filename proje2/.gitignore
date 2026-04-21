@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# PyTorch / veri
+data/*
+!data/.gitkeep
+
+# Büyük ağırlık dosyaları (GitHub'a yüklenmeyecek)
+results/*.pth
+results/**/*.pth
+*.pth
+*.pt
+*.ckpt
+
+# Üretilen feature dosyaları (extract_features_model4.py ile yeniden üretilebilir;
+# X_train.npy 102 MB, GitHub'ın 100 MB limitini aşıyor)
+results/features/*.npy
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter runtime
+.jupyter/

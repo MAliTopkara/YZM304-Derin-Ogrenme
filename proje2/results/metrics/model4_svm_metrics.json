@@ -1,0 +1,17 @@
+{
+  "model_name": "Model 4a - ResNet18 features + SVM (RBF)",
+  "classifier": "sklearn.svm.SVC",
+  "kernel": "rbf",
+  "C": 1.0,
+  "gamma": "scale",
+  "scaler": "StandardScaler (fit on train subset)",
+  "train_subset_size": 10000,
+  "train_subset_per_class": 1000,
+  "test_size": 10000,
+  "feature_dim": 512,
+  "seed": 42,
+  "accuracy": 0.9401,
+  "macro_f1": 0.9401183417257346,
+  "fit_time_seconds": 0.17184925079345703,
+  "predict_time_seconds": 0.4566457271575928
+}
