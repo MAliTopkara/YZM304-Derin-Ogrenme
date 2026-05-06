@@ -1,0 +1,50 @@
+# Data
+Dataset/
+data/processed/
+data/raw/
+
+# Model weights and logs
+results/models/*.pth
+results/models/*.pt
+results/logs/
+*.ckpt
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+env/
+ENV/
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Jupyter
+.jupyter/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node / Frontend
+webapp/frontend/node_modules/
+webapp/frontend/dist/
+webapp/frontend/.vite/
+*.log
+
+# Environment
+.env
+.env.local
+
+# Large files
+*.zip
+*.tar.gz

@@ -1,0 +1,62 @@
+{
+  "Among Us": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 150
+  },
+  "Apex Legends": {
+    "precision": 0.9668874172185431,
+    "recall": 0.9733333333333334,
+    "f1": 0.9700996677740864,
+    "support": 150
+  },
+  "Fortnite": {
+    "precision": 1.0,
+    "recall": 0.9933333333333333,
+    "f1": 0.9966555183946488,
+    "support": 150
+  },
+  "Forza Horizon": {
+    "precision": 1.0,
+    "recall": 0.9666666666666667,
+    "f1": 0.9830508474576272,
+    "support": 150
+  },
+  "Free Fire": {
+    "precision": 0.9867549668874173,
+    "recall": 0.9933333333333333,
+    "f1": 0.9900332225913622,
+    "support": 150
+  },
+  "Genshin Impact": {
+    "precision": 0.9738562091503268,
+    "recall": 0.9933333333333333,
+    "f1": 0.9834983498349835,
+    "support": 150
+  },
+  "God of War": {
+    "precision": 0.9868421052631579,
+    "recall": 1.0,
+    "f1": 0.9933774834437086,
+    "support": 150
+  },
+  "Minecraft": {
+    "precision": 1.0,
+    "recall": 0.9933333333333333,
+    "f1": 0.9966555183946488,
+    "support": 150
+  },
+  "Roblox": {
+    "precision": 0.9933774834437086,
+    "recall": 1.0,
+    "f1": 0.9966777408637874,
+    "support": 150
+  },
+  "Terraria": {
+    "precision": 1.0,
+    "recall": 0.9933333333333333,
+    "f1": 0.9966555183946488,
+    "support": 150
+  }
+}

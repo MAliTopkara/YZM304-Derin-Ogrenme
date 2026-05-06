@@ -1,0 +1,4 @@
+model,accuracy,macro_f1,weighted_f1,top3_accuracy,params_m,size_mb,inference_ms_per_sample,training_time_min
+efficientnet_b0,0.9907,0.9907,0.9907,0.9973,4.02,15.3,9.99,9.5
+resnet50,0.9913,0.9913,0.9913,0.9973,23.53,89.8,9.29,10.6
+vit_base,0.9907,0.9907,0.9907,0.9953,85.81,327.3,12.01,19.5
