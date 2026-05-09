@@ -1,6 +1,11 @@
 /** Backend ile paylaşılan tipler. webapp/backend/main.py response şemaları ile birebir. */
 
-export type ModelName = "resnet50" | "efficientnet_b0" | "vit_base";
+export type ModelName =
+  | "mlp"
+  | "cnn_scratch"
+  | "resnet50"
+  | "efficientnet_b0"
+  | "vit_base";
 
 export interface ModelInfo {
   name: ModelName;

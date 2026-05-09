@@ -53,6 +53,8 @@ def list_models() -> list[dict]:
 
 def _display_name(name: str) -> str:
     return {
+        "mlp": "MLP",
+        "cnn_scratch": "CNN (Scratch)",
         "resnet50": "ResNet50",
         "efficientnet_b0": "EfficientNetB0",
         "vit_base": "ViT-Base/16",
@@ -61,14 +63,22 @@ def _display_name(name: str) -> str:
 
 def _paradigm(name: str) -> str:
     return {
-        "resnet50": "Klasik CNN",
-        "efficientnet_b0": "Modern CNN",
-        "vit_base": "Transformer",
+        "mlp": "Tam Bağlı Baseline",
+        "cnn_scratch": "CNN — Sıfırdan",
+        "resnet50": "Klasik CNN — Transfer",
+        "efficientnet_b0": "Modern CNN — Transfer",
+        "vit_base": "Transformer — Transfer",
     }.get(name, "?")
 
 
 def _approx_params_m(name: str) -> float:
-    return {"resnet50": 25.0, "efficientnet_b0": 5.0, "vit_base": 86.0}.get(name, 0.0)
+    return {
+        "mlp": 38.6,
+        "cnn_scratch": 0.4,
+        "resnet50": 25.0,
+        "efficientnet_b0": 5.0,
+        "vit_base": 86.0,
+    }.get(name, 0.0)
 
 
 def load_model(name: str) -> torch.nn.Module:

@@ -1,0 +1,16 @@
+                precision    recall  f1-score   support
+
+      Among Us     0.3630    0.6800    0.4733       150
+  Apex Legends     0.2742    0.1133    0.1604       150
+      Fortnite     0.4848    0.5333    0.5079       150
+ Forza Horizon     0.7445    0.6800    0.7108       150
+     Free Fire     0.4878    0.1333    0.2094       150
+Genshin Impact     0.5857    0.5467    0.5655       150
+    God of War     0.3953    0.3400    0.3656       150
+     Minecraft     0.7360    0.6133    0.6691       150
+        Roblox     0.3351    0.4200    0.3728       150
+      Terraria     0.6250    0.9667    0.7592       150
+
+      accuracy                         0.5027      1500
+     macro avg     0.5032    0.5027    0.4794      1500
+  weighted avg     0.5032    0.5027    0.4794      1500

@@ -1,5 +1,14 @@
 /** Tek model kartı — paradigma, parametre, accuracy, hız bilgileri. */
-import { AlertTriangle, Check, Cpu, Layers, Timer, Zap } from "lucide-react";
+import {
+  AlertTriangle,
+  Brain,
+  Check,
+  Cpu,
+  Grid3x3,
+  Layers,
+  Timer,
+  Zap,
+} from "lucide-react";
 
 import { accentClasses, type ModelMeta } from "../lib/modelMeta";
 import { formatPercent } from "../lib/utils";
@@ -13,9 +22,11 @@ interface ModelCardProps {
 }
 
 const ICONS: Record<ModelMeta["accent"], typeof Cpu> = {
-  blue: Layers,
-  emerald: Zap,
-  rose: Cpu,
+  slate: Grid3x3,   // MLP → grid (fully-connected)
+  amber: Brain,     // CNN scratch → öğrenmeye yeni başlayan
+  blue: Layers,     // ResNet → katmanlar (residual)
+  emerald: Zap,     // EfficientNet → verimlilik
+  rose: Cpu,        // ViT → attention/heat
 };
 
 export function ModelCard({ meta, trained, selected, onSelect }: ModelCardProps) {

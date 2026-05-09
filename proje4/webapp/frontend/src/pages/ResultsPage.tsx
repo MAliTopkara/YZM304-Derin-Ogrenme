@@ -7,6 +7,7 @@ import { ComparisonResultView } from "../components/ComparisonResultView";
 import { ResultSkeleton } from "../components/ResultSkeleton";
 import { SingleResultView } from "../components/SingleResultView";
 import { api, ApiError } from "../lib/api";
+import { MODEL_META } from "../lib/modelMeta";
 import { useAppState } from "../lib/state";
 import type {
   GradCamAllItem,
@@ -79,14 +80,17 @@ export default function ResultsPage() {
         .finally(() => !cancelled && setLoading(false));
     } else {
       const name = selectedModel as ModelName;
-      Promise.all([
-        api.predict(uploaded.file, name, 3),
-        api.gradcam(uploaded.file, name, 0.45),
-      ])
-        .then(([p, g]) => {
+      const meta = MODEL_META[name];
+      // Heatmap üretemeyen modeller (MLP) için gradcam çağrısını atla — gereksiz 400.
+      const calls: Promise<unknown>[] = [api.predict(uploaded.file, name, 3)];
+      if (meta?.hasHeatmap) {
+        calls.push(api.gradcam(uploaded.file, name, 0.45));
+      }
+      Promise.all(calls)
+        .then((results) => {
           if (cancelled) return;
-          setPredict(p);
-          setGradcam(g);
+          setPredict(results[0] as PredictResponse);
+          setGradcam((results[1] as GradCamResponse | undefined) ?? null);
         })
         .catch(handleErr)
         .finally(() => !cancelled && setLoading(false));
@@ -135,11 +139,11 @@ export default function ResultsPage() {
 
       <div className="text-center space-y-1">
         <h1 className="text-2xl md:text-3xl font-bold text-slate-800 tracking-tight">
-          {isAll ? "3 modelin yargısı" : "Sonuç"}
+          {isAll ? "5 modelin yargısı" : "Sonuç"}
         </h1>
         <p className="text-sm text-slate-500">
           {isAll
-            ? "Aynı görsel, üç farklı mimari — tahminler ve Grad-CAM'ler yan yana."
+            ? "Aynı görsel · 2 baseline + 3 transfer learning — tahminler ve Grad-CAM'ler yan yana."
             : "Top-3 tahminler ve modelin nereye baktığı (Grad-CAM)."}
         </p>
       </div>

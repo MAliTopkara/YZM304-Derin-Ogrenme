@@ -33,10 +33,20 @@ from src.transforms import build_eval_transform
 def get_target_layers(model: torch.nn.Module, model_name: str) -> list[torch.nn.Module]:
     """Mimariye göre Grad-CAM target layer'ı döner.
 
-    ResNet50 → layer4'ün son bloğu (en derin spatial feature map).
+    cnn_scratch  → features[-1] (son conv blok)
+    ResNet50     → layer4'ün son bloğu (en derin spatial feature map).
     EfficientNetB0 → blocks'un son MBConv stage'i.
-    ViT-Base/16 → son transformer block'unun ön norm'u (LayerNorm).
+    ViT-Base/16  → son transformer block'unun ön norm'u (LayerNorm).
+    MLP          → uzamsal feature yok, heatmap üretilemez (ValueError raise).
     """
+    if model_name == "mlp":
+        raise ValueError(
+            "MLP için Grad-CAM üretilemez: tam bağlı katmanlar uzamsal yapı taşımaz."
+        )
+    if model_name == "cnn_scratch":
+        # features = Sequential of conv_blocks; sonuncusu son maxpool öncesi
+        # tüm aktivasyon haritalarını içerir
+        return [model.features[-1]]
     if model_name == "resnet50":
         return [model.layer4[-1]]
     if model_name == "efficientnet_b0":

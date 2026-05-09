@@ -29,20 +29,41 @@ export function SingleResultView({
 }: SingleResultViewProps) {
   const meta = MODEL_META[model];
   const accent = accentClasses(meta.accent);
-  const overlayDataUrl = pngB64ToDataUrl(gradcam?.overlay_png_b64);
+  const overlayDataUrl = meta.hasHeatmap ? pngB64ToDataUrl(gradcam?.overlay_png_b64) : null;
   const top1 = predict?.predictions[0];
+
+  const heatmapNote =
+    model === "vit_base"
+      ? "ViT için EigenCAM kullanılır (gradient-free, attention'a dayalı)."
+      : model === "cnn_scratch"
+        ? "GradCAM — sıfırdan eğitilen CNN'in son conv bloğundaki gradient'lerden üretilir."
+        : "GradCAM — modelin son conv katmanındaki gradient'lerden üretilir.";
 
   return (
     <div className="grid md:grid-cols-[1.4fr_1fr] gap-5">
-      {/* Sol — görsel + heatmap */}
+      {/* Sol — görsel + heatmap (varsa) */}
       <div className="space-y-3">
-        <GradCamView originalUrl={originalUrl} overlayDataUrl={overlayDataUrl} />
-        {gradcam && (
-          <p className="text-xs text-slate-500 px-1">
-            {model === "vit_base"
-              ? "ViT için EigenCAM kullanılır (gradient-free, attention'a dayalı)."
-              : "GradCAM — modelin son conv katmanındaki gradient'lerden üretilir."}
-          </p>
+        {meta.hasHeatmap ? (
+          <>
+            <GradCamView originalUrl={originalUrl} overlayDataUrl={overlayDataUrl} />
+            {gradcam && (
+              <p className="text-xs text-slate-500 px-1">{heatmapNote}</p>
+            )}
+          </>
+        ) : (
+          <>
+            <div className="relative rounded-xl overflow-hidden border border-slate-200 bg-slate-900 aspect-[16/9]">
+              <img
+                src={originalUrl}
+                alt="Görsel"
+                className="absolute inset-0 w-full h-full object-contain"
+              />
+            </div>
+            <p className="text-xs text-slate-500 px-1">
+              MLP tam bağlı katmanlardan oluşur — uzamsal feature map'i olmadığı
+              için Grad-CAM gibi spatial heatmap teknikleri uygulanamaz.
+            </p>
+          </>
         )}
       </div>
 

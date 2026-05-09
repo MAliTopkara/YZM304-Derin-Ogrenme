@@ -39,7 +39,27 @@ SPLIT_RATIOS = (0.70, 0.15, 0.15)
 SPLIT_SEED = 42
 
 MODEL_CONFIGS = {
+    # Baseline modeller (sıfırdan eğitim, pretrained yok) — "transfer learning'in
+    # değerini somutlaştırmak" için.
+    "mlp": {
+        "kind": "custom",                # timm değil, src/models.py'da tanımlı
+        "batch_size": 64,
+        "lr": 1e-3,                       # daha yüksek lr, sıfırdan eğitim
+        "epochs": 20,
+        "pretrained": False,
+    },
+    "cnn_scratch": {
+        "kind": "custom",
+        "batch_size": 32,
+        "lr": 1e-3,
+        "epochs": 20,
+        "pretrained": False,
+    },
+
+    # Transfer learning (ImageNet pretrained, fine-tuning) — projenin ana
+    # karşılaştırma kümesi.
     "resnet50": {
+        "kind": "timm",
         "timm_name": "resnet50",
         "batch_size": 32,
         "lr": 1e-4,
@@ -47,6 +67,7 @@ MODEL_CONFIGS = {
         "pretrained": True,
     },
     "efficientnet_b0": {
+        "kind": "timm",
         "timm_name": "efficientnet_b0",
         "batch_size": 32,
         "lr": 1e-4,
@@ -54,6 +75,7 @@ MODEL_CONFIGS = {
         "pretrained": True,
     },
     "vit_base": {
+        "kind": "timm",
         "timm_name": "vit_base_patch16_224",
         "batch_size": 16,
         "lr": 1e-4,

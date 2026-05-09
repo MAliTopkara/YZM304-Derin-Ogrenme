@@ -173,7 +173,11 @@ def main():
     pretrained = not args.no_pretrained
     use_amp = args.amp and device.type == "cuda"
 
-    print(f"Model: {args.model} (timm: {cfg['timm_name']})")
+    kind = cfg.get("kind", "timm")
+    if kind == "timm":
+        print(f"Model: {args.model} (timm: {cfg['timm_name']})")
+    else:
+        print(f"Model: {args.model} (custom, sıfırdan eğitim)")
     print(f"Epochs: {epochs}, batch_size: {batch_size}, lr: {lr}, pretrained: {pretrained}")
     print(f"AMP: {use_amp}  (flag={args.amp}, device={device.type})")
 
