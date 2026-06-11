@@ -15,6 +15,16 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
+\usepackage{dblfloatfix} % iki-sutun (figure*) float'larin dogru yerlesimi; kaynakcadan sonraya tasmayi onler
+
+% Float yerlesimini gevset: daha cok sekil sayfa ustune/altina sigsin
+\renewcommand{\topfraction}{0.92}
+\renewcommand{\bottomfraction}{0.7}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.75}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{5}
 
 \graphicspath{{outputs/figures/}}
 
@@ -134,7 +144,7 @@ Klinik bağlamda yanlış negatifin maliyeti yüksek olduğundan, varsayılan $0
 
 \section{Bulgular}
 \subsection{Ana Karşılaştırma}
-Tablo~\ref{tab:main}, üç mimarinin üç tohum üzerinden ortalama $\pm$ standart sapma test başarımını ($t = 0.5$) verir. Üç mimari accuracy açısından birbirine yakındır ($\approx \%87$--$89$); ancak azınlık sınıfını da dengeli ölçen F1, makro-F1 ve ROC-AUC'ta \textbf{ResNet-50} açık biçimde öndedir. ResNet-50'nin düşük standart sapması ($\pm 0.003$) bu mimarinin tohumlar arası en kararlı model olduğunu, DenseNet-121'in ise en yüksek değişkenliğe sahip olduğunu gösterir.
+Tablo~\ref{tab:main}, üç mimarinin üç tohum üzerinden ortalama $\pm$ standart sapma test başarımını ($t = 0.5$) verir. Üç mimari accuracy açısından birbirine yakındır ($\approx \%87$--$89$); ancak azınlık sınıfını da dengeli ölçen F1, makro-F1 ve ROC-AUC'ta \textbf{ResNet-50} açık biçimde öndedir. ResNet-50'nin düşük standart sapması ($\pm 0.003$) bu mimarinin tohumlar arası en kararlı model olduğunu, DenseNet-121'in ise en yüksek değişkenliğe sahip olduğunu gösterir. Öğrenme eğrileri (Şekil~\ref{fig:lc}) üç mimarinin benzer bir doğrulama tavanına yakınsadığını; metrik dağılımları (Şekil~\ref{fig:box}) ise ResNet-50'nin en yüksek medyan ve en dar değişkenliğe sahip olduğunu görsel olarak doğrular.
 
 \begin{table*}[t]
 \caption{Ana Karşılaştırma --- Test Seti, Ortalama $\pm$ Std (3 Tohum, $t = 0.5$). Koyu: sütun en iyisi.}
@@ -151,8 +161,29 @@ EfficientNet-B0       & $0.869 \pm 0.011$ & $0.635 \pm 0.052$ & $0.623 \pm 0.051
 \end{tabular}
 \end{table*}
 
+\begin{figure*}[b]
+\centering
+\includegraphics[width=0.92\textwidth]{learning_curves_combined.png}
+\caption{Üç mimarinin tüm tohumlarda birleşik öğrenme eğrileri (doğrulama metrikleri). Modeller benzer bir doğruluk tavanına ulaşır.}
+\label{fig:lc}
+\end{figure*}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{metric_boxplot.png}
+\caption{Metrik kutu grafiği (modeller $\times$ tohumlar). ResNet-50 hem en yüksek medyan F1/AUC'ye hem de en dar dağılıma sahiptir.}
+\label{fig:box}
+\end{figure}
+
 \subsection{İstatistiksel Anlamlılık}
-Modeller arası farkların gürültü düzeyinde olup olmadığını üç testle sınadık. \textbf{Eşli $t$-testi} (her tohum eşlenik gözlem, F1 @ $t=0.5$): ResNet-50'nin EfficientNet-B0'a F1 üstünlüğü \emph{anlamlıdır} ($t = 5.48$, $p = 0.032$); buna karşın ResNet-50 vs DenseNet-121 ($p = 0.32$) ve DenseNet-121 vs EfficientNet-B0 ($p = 0.35$) farkları anlamlı değildir. \textbf{DeLong testi} (ROC-AUC) ResNet-50'nin DenseNet-121'e AUC üstünlüğünü iki tohumda anlamlı bulmuştur ($p = 0.016$ ve $p = 0.015$). \textbf{McNemar testi} çoğu çiftte anlamlı fark vermemiştir. Sonuç: ResNet-50 azınlık sınıfı başarımında en güçlü ve en tutarlı modeldir; EfficientNet-B0 ile arasındaki fark istatistiksel olarak anlamlıdır.
+Modeller arası farkların gürültü düzeyinde olup olmadığını üç testle sınadık. \textbf{Eşli $t$-testi} (her tohum eşlenik gözlem, F1 @ $t=0.5$): ResNet-50'nin EfficientNet-B0'a F1 üstünlüğü \emph{anlamlıdır} ($t = 5.48$, $p = 0.032$); buna karşın ResNet-50 vs DenseNet-121 ($p = 0.32$) ve DenseNet-121 vs EfficientNet-B0 ($p = 0.35$) farkları anlamlı değildir. \textbf{DeLong testi} (ROC-AUC) ResNet-50'nin DenseNet-121'e AUC üstünlüğünü iki tohumda anlamlı bulmuştur ($p = 0.016$ ve $p = 0.015$). \textbf{McNemar testi} çoğu çiftte anlamlı fark vermemiştir. Sonuç: ResNet-50 azınlık sınıfı başarımında en güçlü ve en tutarlı modeldir; EfficientNet-B0 ile arasındaki fark istatistiksel olarak anlamlıdır. ROC eğrileri (Şekil~\ref{fig:roc}) bu sıralamayı destekler.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{roc_comparison_all_seeds.png}
+\caption{ROC eğrisi karşılaştırması (tüm tohumlar). ResNet-50 en yüksek ortalama AUC'yi verir.}
+\label{fig:roc}
+\end{figure}
 
 \subsection{Çalışma Noktası (Karar Eşiği) Analizi}
 Sınıf dengesizliği nedeniyle karar eşiği seçimi precision--recall dengesini doğrudan belirler (Tablo~\ref{tab:thr}). Varsayılan $t = 0.5$ precision'ı yükseltirken recall'u sınırlar. \textbf{Youden} noktası ($t \approx 0.30$) kırık geri-çağırma oranını $0.667 \to 0.731$'e yükseltir; bu, kaçırılan kırığın maliyetli olduğu klinik senaryoda tercih edilebilir bir ödünleşimdir.
@@ -190,8 +221,15 @@ EfficientNet-B0 & $\mathbf{4.01}$ & 35.9 & 0.626 & 0.868 \\
 \end{tabular}
 \end{table}
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.92\textwidth]{gradcam_all_models_seed42.png}
+\caption{Grad-CAM ısı haritaları (tohum 42). Doğru kararlarda etkinleşme kırık bölgesinde toplanır; hatalı örneklerde dağılır.}
+\label{fig:gradcam}
+\end{figure*}
+
 \subsection{Hata Analizi (Karışıklık Matrisleri)}
-Tablo~\ref{tab:cm}, tohum 42 için her mimarinin test karışıklık matrisini özetler. Üç modelde de hataların büyük kısmı kırığı kaçırma (yanlış negatif) biçimindedir; bu, dengesiz veride beklenen davranıştır ve azınlık sınıfının recall'unun neden darboğaz olduğunu açıklar. ResNet-50 en düşük FN (37) ile en yüksek kırık geri-çağırmasını sağlamıştır.
+Tablo~\ref{tab:cm}, tohum 42 için her mimarinin test karışıklık matrisini özetler. Üç modelde de hataların büyük kısmı kırığı kaçırma (yanlış negatif) biçimindedir; bu, dengesiz veride beklenen davranıştır ve azınlık sınıfının recall'unun neden darboğaz olduğunu açıklar. ResNet-50 en düşük FN (37) ile en yüksek kırık geri-çağırmasını sağlamıştır. Karışıklık matrislerinin görsel biçimi Şekil~\ref{fig:cm}'de verilmiştir.
 
 \begin{table}[t]
 \caption{Karışıklık Matrisleri --- Test Seti (Tohum 42)}
@@ -208,31 +246,6 @@ EfficientNet-B0 & 468 & 37 & 41 & 67 & 0.632 & 0.869 \\
 \end{tabular}
 \end{table}
 
-\subsection{Açıklanabilirlik (Grad-CAM)}
-En iyi modelin (ResNet-50) kararlarını yorumlamak için son evrişim bloğu (\texttt{layer4}) üzerinden Grad-CAM ısı haritaları üretilmiştir (Şekil~\ref{fig:gradcam}). Doğru sınıflandırılan kırık örneklerinde ısı haritası tutarlı biçimde kırık/kortikal süreksizlik bölgesinde yoğunlaşmakta; modelin klinik olarak anlamlı bölgelere odaklandığını doğrulamaktadır. Hatalı örneklerde ise ısı haritası dağınıktır ya da kırık dışı yapılara kaymaktadır. Modelin sistematik kör noktaları ince/çizgisel kırıklar ve atipik görüntülerdir.
-
-% ---------------- FIGURES ----------------
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.92\textwidth]{learning_curves_combined.png}
-\caption{Üç mimarinin tüm tohumlarda birleşik öğrenme eğrileri (doğrulama metrikleri). Modeller benzer bir doğruluk tavanına ulaşır.}
-\label{fig:lc}
-\end{figure*}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{roc_comparison_all_seeds.png}
-\caption{ROC eğrisi karşılaştırması (tüm tohumlar). ResNet-50 en yüksek ortalama AUC'yi verir.}
-\label{fig:roc}
-\end{figure}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{metric_boxplot.png}
-\caption{Metrik kutu grafiği (modeller $\times$ tohumlar). ResNet-50 hem en yüksek medyan F1/AUC'ye hem de en dar dağılıma sahiptir.}
-\label{fig:box}
-\end{figure}
-
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.32\columnwidth]{confusion_resnet50_seed42.png}\hfill
@@ -242,12 +255,8 @@ En iyi modelin (ResNet-50) kararlarını yorumlamak için son evrişim bloğu (\
 \label{fig:cm}
 \end{figure}
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.92\textwidth]{gradcam_all_models_seed42.png}
-\caption{Grad-CAM ısı haritaları (tohum 42). Doğru kararlarda etkinleşme kırık bölgesinde toplanır; hatalı örneklerde dağılır.}
-\label{fig:gradcam}
-\end{figure*}
+\subsection{Açıklanabilirlik (Grad-CAM)}
+En iyi modelin (ResNet-50) kararlarını yorumlamak için son evrişim bloğu (\texttt{layer4}) üzerinden Grad-CAM ısı haritaları üretilmiştir (Şekil~\ref{fig:gradcam}). Doğru sınıflandırılan kırık örneklerinde ısı haritası tutarlı biçimde kırık/kortikal süreksizlik bölgesinde yoğunlaşmakta; modelin klinik olarak anlamlı bölgelere odaklandığını doğrulamaktadır. Hatalı örneklerde ise ısı haritası dağınıktır ya da kırık dışı yapılara kaymaktadır. Modelin sistematik kör noktaları ince/çizgisel kırıklar ve atipik görüntülerdir.
 
 \section{Tartışma}
 \textbf{Mimariler doğrulukta yakın, azınlık başarımında ayrışır.} ImageNet ön-eğitimli üç mimari, orta ölçekli ve dengesiz bu veride benzer bir doğruluk tavanına ulaşır. Asıl ayrım, dengesizlik altında azınlık sınıfı başarımında (F1/AUC) ortaya çıkar; burada ResNet-50 hem en yüksek hem en kararlı modeldir ve EfficientNet-B0'a üstünlüğü istatistiksel olarak anlamlıdır.
