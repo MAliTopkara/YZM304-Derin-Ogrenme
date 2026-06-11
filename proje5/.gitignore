@@ -1,0 +1,30 @@
+# Veri seti (boyut nedeniyle depoya dahil edilmez — FracAtlas kaynağından indirilmeli)
+FracAtlas/
+
+# Eğitilmiş model ağırlıkları (~488 MB)
+outputs/checkpoints/
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Sanal ortamlar
+.venv/
+venv/
+env/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# LaTeX ara dosyaları
+*.aux
+*.log
+*.out
+*.synctex.gz
+
+# Claude Code
+.claude/

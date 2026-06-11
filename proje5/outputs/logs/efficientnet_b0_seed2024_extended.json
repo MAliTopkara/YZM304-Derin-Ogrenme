@@ -1,0 +1,97 @@
+{
+  "run": "efficientnet_b0_seed2024",
+  "model_name": "efficientnet_b0",
+  "seed": 2024,
+  "val_best_threshold_f1": {
+    "threshold": 0.4,
+    "val_score": 0.7488584474885844
+  },
+  "val_best_threshold_youden": {
+    "threshold": 0.34,
+    "val_score": 0.7084708470847085
+  },
+  "test_metrics_t0.5": {
+    "threshold": 0.5,
+    "accuracy": 0.8776508972267537,
+    "precision": 0.6813186813186813,
+    "recall": 0.5740740740740741,
+    "f1": 0.6231155778894473,
+    "f1_macro": 0.7750436701521238,
+    "roc_auc": 0.877997799779978,
+    "confusion": [
+      [
+        476,
+        29
+      ],
+      [
+        46,
+        62
+      ]
+    ]
+  },
+  "test_metrics_tF1opt": {
+    "threshold": 0.4,
+    "accuracy": 0.8792822185970636,
+    "precision": 0.6666666666666666,
+    "recall": 0.6296296296296297,
+    "f1": 0.6476190476190476,
+    "f1_macro": 0.7873922009748782,
+    "roc_auc": 0.877997799779978,
+    "confusion": [
+      [
+        471,
+        34
+      ],
+      [
+        40,
+        68
+      ]
+    ]
+  },
+  "test_metrics_tYouden": {
+    "threshold": 0.34,
+    "accuracy": 0.8711256117455138,
+    "precision": 0.6306306306306306,
+    "recall": 0.6481481481481481,
+    "f1": 0.639269406392694,
+    "f1_macro": 0.7804092811506668,
+    "roc_auc": 0.877997799779978,
+    "confusion": [
+      [
+        464,
+        41
+      ],
+      [
+        38,
+        70
+      ]
+    ]
+  },
+  "per_class_report_tF1opt": {
+    "non_fractured": {
+      "precision": 0.9217221135029354,
+      "recall": 0.9326732673267327,
+      "f1-score": 0.9271653543307087,
+      "support": 505.0
+    },
+    "fractured": {
+      "precision": 0.6666666666666666,
+      "recall": 0.6296296296296297,
+      "f1-score": 0.6476190476190476,
+      "support": 108.0
+    },
+    "accuracy": 0.8792822185970636,
+    "macro avg": {
+      "precision": 0.794194390084801,
+      "recall": 0.7811514484781812,
+      "f1-score": 0.7873922009748782,
+      "support": 613.0
+    },
+    "weighted avg": {
+      "precision": 0.8767857541908358,
+      "recall": 0.8792822185970636,
+      "f1-score": 0.8779141290046738,
+      "support": 613.0
+    }
+  }
+}

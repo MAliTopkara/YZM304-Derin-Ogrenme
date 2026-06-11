@@ -1,0 +1,11 @@
+# Environment used for this project (Windows, Python 3.14, CUDA 13.0, RTX 5070 Ti).
+# For CUDA builds of torch/torchvision, install from pytorch.org first.
+torch==2.11.0
+torchvision==0.26.0
+numpy==2.4.3
+pandas==2.2.3
+scikit-learn==1.8.0
+matplotlib==3.10.8
+Pillow==12.1.1
+scipy==1.17.1
+statsmodels==0.14.6

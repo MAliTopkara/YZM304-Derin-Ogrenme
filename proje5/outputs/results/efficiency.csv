@@ -1,0 +1,4 @@
+model,total_params_M,trainable_params_M,avg_epoch_sec,avg_epochs_trained,avg_total_train_time_sec,n_runs
+resnet50,23.512,23.512,37.607,16.333,614.246,3
+densenet121,6.956,6.956,39.975,13.0,519.681,3
+efficientnet_b0,4.01,4.01,35.915,15.667,562.666,3

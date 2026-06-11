@@ -1,0 +1,47 @@
+{
+  "run_name": "sanity_resnet50",
+  "model_name": "resnet50",
+  "best_val_f1": 0.5787234042553191,
+  "test_metrics": {
+    "accuracy": 0.8140293637846656,
+    "precision": 0.4765625,
+    "recall": 0.5648148148148148,
+    "f1": 0.5169491525423728,
+    "roc_auc": 0.7997066373303998,
+    "confusion": [
+      [
+        438,
+        67
+      ],
+      [
+        47,
+        61
+      ]
+    ]
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.616909647972633,
+      "train_acc": 0.6737836891844592,
+      "val_acc": 0.8548123980424144,
+      "val_f1": 0.5741626794258373,
+      "val_precision": 0.594059405940594,
+      "val_recall": 0.5555555555555556,
+      "val_roc_auc": 0.8345617895122845,
+      "epoch_seconds": 54.74207925796509
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.5486117941247528,
+      "train_acc": 0.727686384319216,
+      "val_acc": 0.8384991843393148,
+      "val_f1": 0.5787234042553191,
+      "val_precision": 0.5354330708661418,
+      "val_recall": 0.6296296296296297,
+      "val_roc_auc": 0.8524935826916025,
+      "epoch_seconds": 37.28079533576965
+    }
+  ],
+  "checkpoint": "C:\\Users\\ASUS\\Desktop\\dersler\\Derinogrenme_proje5\\outputs\\checkpoints\\sanity_resnet50_best.pt"
+}

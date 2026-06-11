@@ -1,0 +1,23 @@
+{
+  "total": 4083,
+  "seed": 42,
+  "val_split": 0.15,
+  "test_split": 0.15,
+  "splits": {
+    "train": {
+      "total": 2857,
+      "non_fractured": 2356,
+      "fractured": 501
+    },
+    "val": {
+      "total": 613,
+      "non_fractured": 505,
+      "fractured": 108
+    },
+    "test": {
+      "total": 613,
+      "non_fractured": 505,
+      "fractured": 108
+    }
+  }
+}
